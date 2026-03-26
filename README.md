@@ -6,8 +6,8 @@ The framework iteratively refines atomic structures using MLIPs, verifies the ge
 
 ## Repository Structure
 
-* `makeopt.py`: Main driver for intermediate structural optimizations (Initial/Final States).
-* `makeneb.py`: Main driver for Nudged Elastic Band (NEB) transition state searches.
+* `LFT-CRN-opt.py`: Main driver for intermediate structural optimizations (Initial/Final States).
+* `LFT-CRN-neb.py`: Main driver for Nudged Elastic Band (NEB) transition state searches.
 * `utils/`: Directory containing required VASP inputs, configuration YAMLs, and ML training scripts.
 * `docs/`: Additional documentation.
     * [Structural Optimization Guide](docs/README_makeopt.md)
