@@ -1,47 +1,29 @@
-# Active Learning Framework for Structural Optimization
+# Active Learning Framework for Surface Chemistry
 
-This repository provides an automated active learning workflow designed for surface chemistry and catalyst structural optimization. By coupling Machine Learning Interatomic Potentials (MLIPs) with Density Functional Theory (DFT), the framework systematically refines atomic structures, verifies results using first-principles calculations, and iteratively fine-tunes the potential to improve predictive accuracy.
+This repository provides an automated active learning workflow coupling Machine Learning Interatomic Potentials (MLIPs) with Density Functional Theory (DFT) calculations. It is designed to perform structural relaxations and transition state searches for surface reactions (e.g., catalysis).
 
-## Features
+The framework iteratively refines atomic structures using MLIPs, verifies the geometries and energies using first-principles calculations (VASP), and fine-tunes the underlying potential using the accumulated DFT data via `dpdata` and ASE.
 
-* **Active Learning Loop**: Iteratively performs ML-driven structural relaxation, DFT evaluation, and dynamic fine-tuning.
-* **Externalized Configuration**: Uses a customizable `config.yaml` file to control directories, simulation parameters, and constraints without altering the core logic.
-* **Job Management**: Native integration with the Slurm workload manager for batch submitting and polling VASP/Fine-tuning tasks.
-* **Data Parsing**: Automates INCAR/POSCAR modifications (e.g., handling magnetic moments, selective dynamics via tags) and converts OUTCAR data to ASE databases utilizing `dpdata`.
-* **Resilience**: Implements a checkpointing system (`record.txt`) allowing interrupted jobs to resume exactly from the point of failure.
+## Repository Structure
+
+* `makeopt.py`: Main driver for intermediate structural optimizations (Initial/Final States).
+* `makeneb.py`: Main driver for Nudged Elastic Band (NEB) transition state searches.
+* `utils/`: Directory containing required VASP inputs, configuration YAMLs, and ML training scripts.
+* `docs/`: Additional documentation.
+    * [Structural Optimization Guide](docs/README_makeopt.md)
+    * [Transition State Search Guide](docs/README_makeneb.md)
 
 ## Prerequisites
 
-Ensure the following software and libraries are installed within your computational environment:
+* **Software**: VASP (executable `vasp_std`), VASPKIT, Slurm Workload Manager.
+* **Python Packages**: `ase`, `fairchem`, `dpdata`, `numpy`, `torch`, `pyyaml`.
 
-* **Python Libraries**: `ase`, `fairchem`, `dpdata`, `numpy`, `torch`, `yaml`
-* **Calculation Software**: 
-    * VASP (Vienna Ab initio Simulation Package)
-    * VASPKIT
-* **System Manager**: Slurm
+## Core Logic
 
-## Setup
+The workflows in this repository follow a cyclic active learning approach:
+1.  **ML Drive**: Relax geometries or NEB images using the current MLIP checkpoint.
+2.  **DFT Verification**: Submit the ML-relaxed structures to VASP for high-accuracy evaluation.
+3.  **Data Conversion**: Parse VASP `OUTCAR` outputs into an ASE database format.
+4.  **Model Fine-tuning**: Train the MLIP on the newly accumulated dataset to produce an updated checkpoint for the next iteration.
 
-1.  Modify the `config.yaml` file to match your environment and paths:
-    ```yaml
-    directories:
-      - "/path/to/IS1"
-      - "/path/to/IS2"
-    max_iteration: 4
-    fix_atoms: 24
-    batch_size: 8
-    final_DFT: true
-    work_directory: "./"
-    utils_dir: "/path/to/utils"
-    db_path: "output_database.db"
-    record_file: "record.txt"
-    origin_checkpoint_path: "/path/to/model/checkpoint.pt"
-    ```
-    *Note: The `utils_dir` should contain your baseline input files like `INCAR_SCF`, `KPOINTS`, `sub.oc`, `finetune1.yml`, and `main.py`.*
-
-## Usage
-
-Execute the main script using Python. By default, it looks for `config.yaml` in the active directory, but you can explicitly specify the path via arguments.
-
-```bash
-python makeopt.py --config config.yaml
+For detailed instructions on each module, please refer to their respective documentation files.
