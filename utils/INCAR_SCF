@@ -1,0 +1,25 @@
+SYSTEM =  Metal
+
+LCHARG = F
+LWAVE  = F
+ISTART = 1
+ICHARG = 1
+
+
+ISMEAR =  1
+SIGMA  =  0.1
+ENCUT  =  400
+EDIFF  =  1E-5
+NELM   =  150
+NELMIN =  6
+NELMDL = -10
+ISIF   =  2
+ALGO   =  F
+LREAL  =  Auto
+ISYM   =  0
+
+IBRION =  1
+POTIM  =  0.1
+EDIFFG = -0.03
+NSW    =  1
+NCORE=4

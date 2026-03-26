@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -n 5
+#SBATCH -N 1
+#SBATCH --gres=gpu:1
+#SBATCH --partition=gpu
+
+# 打印任务信息
+echo "Starting job $SLURM_JOB_ID at " `date`
+echo "SLURM_SUBMIT_DIR is $SLURM_SUBMIT_DIR"
+echo "Running on nodes: $SLURM_NODELIST"
+
+
+python main.py --mode train --config-yml finetune.yml --checkpoint ./utils/GNOC-CLAM.pt > out
+# 任务结束
+echo "Job $SLURM_JOB_ID done at " `date`
