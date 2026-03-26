@@ -1,0 +1,44 @@
+---
+
+###  Configuration File Example (`utils/config_neb.yaml`)
+
+This file should be placed in your `utils` directory. It externalizes all hard-coded parameters from the Python script.
+
+```yaml
+# Configuration for makeneb.py
+
+# List of directories containing the reaction path tasks.
+# The script expects the Initial State (IS) and Final State (FS) to be
+# located at predictable relative paths (e.g., ../../IS/opt3 and ../opt3).
+directories:
+  - "/home/user/project/Cu211/COH/CO-H"
+  - "/home/user/project/Cu211/COOH/CO-OH"
+
+paths:
+  work_directory: "./"
+  utils_dir: "/home/user/project/utils"
+  db_name: "output_database.db"
+  record_file: "record.txt"
+  origin_checkpoint_path: "/home/user/project/models/initial_checkpoint.pt"
+
+workflow:
+  max_iteration: 3
+  batch_size: 3
+  # Set to true to apply stricter VASP convergence criteria in the final iteration
+  final_DFT: false
+
+structure:
+  # Number of atoms to fix at the bottom of the slab (z-coordinate sorting)
+  fix_atoms: 24
+
+neb_params:
+  # Spring constant between images (eV/A^2)
+  spring_constant: 1
+  # Default number of intermediate images (used in the first iteration)
+  default_n_images: 8
+
+# Multi-stage relaxation schedules for the ML-NEB process.
+# The optimizer will sequentially relax the band to these force thresholds (eV/A).
+fmax_schedules:
+  stage_1: [0.8, 0.4, 0.3, 0.2, 0.15, 0.10, 0.08]
+  stage_2: [0.8, 0.4, 0.3, 0.2, 0.10, 0.08, 0.05]
