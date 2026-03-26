@@ -27,3 +27,5 @@ The workflows in this repository follow a cyclic active learning approach:
 4.  **Model Fine-tuning**: Train the MLIP on the newly accumulated dataset to produce an updated checkpoint for the next iteration.
 
 For detailed instructions on each module, please refer to their respective documentation files.
+
+The MLIP model and DFT datasets can be download in ZENODO repository https://zenodo.org/records/17303850 
