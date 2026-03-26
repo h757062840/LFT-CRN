@@ -1,4 +1,5 @@
 # Local-Fine-Tuning framework for Catalytic Reaction Network exploration(LFT-CRN) 
+<img width="1326" height="800" alt="Gemini_Generated_Image_obae3lobae3lobae" src="https://github.com/user-attachments/assets/26903599-3103-4172-be86-ac98a05dba86" />
 
 This repository provides an automated active learning workflow coupling Machine Learning Interatomic Potentials (MLIPs) with Density Functional Theory (DFT) calculations. It is designed to perform structural relaxations and transition state searches for surface reactions (e.g., catalysis).
 
