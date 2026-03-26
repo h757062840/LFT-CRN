@@ -1,4 +1,4 @@
-# Active Learning Framework for Surface Chemistry
+# Local-Fine-Tuning framework for Catalytic Reaction Network exploration(LFT-CRN) 
 
 This repository provides an automated active learning workflow coupling Machine Learning Interatomic Potentials (MLIPs) with Density Functional Theory (DFT) calculations. It is designed to perform structural relaxations and transition state searches for surface reactions (e.g., catalysis).
 
