@@ -10,8 +10,8 @@ The framework iteratively refines atomic structures using MLIPs, verifies the ge
 * `LFT-CRN-neb.py`: Main driver for Nudged Elastic Band (NEB) transition state searches.
 * `utils/`: Directory containing required VASP inputs, configuration YAMLs, and ML training scripts.
 * `docs/`: Additional documentation.
-    * [Structural Optimization Guide](docs/README_makeopt.md)
-    * [Transition State Search Guide](docs/README_makeneb.md)
+    * [Structural Optimization Guide](LFT-OPT/readme.md)
+    * [Transition State Search Guide](LFT-NEB/readme.md)
 
 ## Prerequisites
 
